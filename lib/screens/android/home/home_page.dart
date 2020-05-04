@@ -1,5 +1,7 @@
+import 'package:applivrosbloc/components/book_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
 
@@ -15,12 +17,19 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SystemChrome.setEnabledSystemUIOverlays([]);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.only(top: 42,),
+        padding: EdgeInsets.only(top: 42),
         child: Column(
           children: <Widget>[
             Row(
@@ -31,11 +40,16 @@ class _HomeState extends State<Home> {
                     "Procurar",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: 26,
                     ),
                   ),
                 ),
-                Text("Recomendar"),
+                Text("Recomendar",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
 
               ],
             ),
@@ -52,8 +66,13 @@ class _HomeState extends State<Home> {
                       padding: EdgeInsets.only(left: 12, right: 12),
                       child: GestureDetector(
                         child: Chip(
+                          padding: EdgeInsets.only(left: 10,right: 10),
                           backgroundColor: index == _selectedIndex ? Theme.of(context).primaryColor : Colors.grey,
-                          label: Text(categorias.elementAt(index)),
+                          label: Text(categorias.elementAt(index),
+                            style: TextStyle(
+                              color: index == _selectedIndex ? Colors.white : Colors.black
+                            ),
+                          ),
                         ),
                         onTap: (){
                           _selectedIndex = index;
@@ -65,7 +84,19 @@ class _HomeState extends State<Home> {
                     );
                   }
               ),
-            )
+            ),
+            Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: ListView.builder(
+                    itemCount: categorias.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index){
+                      return BookWidget();
+                    }
+                ),
+              ),
+            ),
           ],
         ),
       )
