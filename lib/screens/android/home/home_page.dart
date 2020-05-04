@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
 
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   List<String> categorias = [
     "Programação", "Android", "Java", "História", "Ciências",
   ];
+
   int _selectedIndex = 0;
 
   @override
@@ -44,9 +50,17 @@ class Home extends StatelessWidget {
                   itemBuilder: (context, index){
                     return Padding(
                       padding: EdgeInsets.only(left: 12, right: 12),
-                      child: Chip(
-                        backgroundColor: index == _selectedIndex ? Theme.of(context).primaryColor : Colors.grey,
-                        label: Text(categorias.elementAt(index)),
+                      child: GestureDetector(
+                        child: Chip(
+                          backgroundColor: index == _selectedIndex ? Theme.of(context).primaryColor : Colors.grey,
+                          label: Text(categorias.elementAt(index)),
+                        ),
+                        onTap: (){
+                          _selectedIndex = index;
+                          setState(() {
+
+                          });
+                        },
                       ),
                     );
                   }
