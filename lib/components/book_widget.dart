@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class BookWidget extends StatelessWidget {
 
   String imageUrl= "https://images.unsplash.com/photo-1542936221-b02434e3d36e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=653&q=80";
-
+  String author;
+  String title;
   @override
   Widget build(BuildContext context) {
     return Container(
