@@ -9,8 +9,8 @@ class HomePageEvent extends Equatable {
 }
 
 class HomePageEventSearch extends HomePageEvent{
-  final String query;
-  HomePageEventSearch({@required this.query});
+  final String category;
+  HomePageEventSearch({@required this.category});
 
   @override
   String toString() => "HomePageEventSearch";

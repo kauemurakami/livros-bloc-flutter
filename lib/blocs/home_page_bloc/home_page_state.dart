@@ -1,32 +1,37 @@
+import 'package:applivrosbloc/models/Results.dart';
 import 'package:applivrosbloc/models/book.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
-class HomePageState extends Equatable{
+class HomePageState extends Equatable {
+
+  final String category;
+  final Result<List<Book>, String> books;
+
+  HomePageState({
+    @required this.books,
+    @required this.category
+  }) : super();
+
   @override
   // TODO: implement props
   List<Object> get props => null;
-}
 
-class HomePageStateLoading extends HomePageState{
-  @override
-  String toString() => "HomePageStateLoading";
-}
+  factory HomePageState.initial() {
+    return HomePageState(
+        books: Result.idle(data: []),
+        category: ""
+    );
+  }
 
-class HomePageStateSuccess extends HomePageState {
-  List<Book> books;
-  HomePageStateSuccess({@required this.books});
-
-  @override
-  String toString() => "HomePageStateSuccess";
-}
-
-class HomePageStateError extends HomePageState{
-  final String message;
-
-  HomePageStateError({@required this.message});
-
-  @override
-  String toString() => "HomePageStateError";
+  HomePageState copy({
+    String category,
+    Result<List<Book>, String> books}) {
+    return HomePageState(
+        category: category ?? this.category,
+        books: books ?? this.books
+    );
+  }
 
 }

@@ -97,7 +97,7 @@ class VolumeInfo {
   ReadingModes readingModes;
   int pageCount;
   String printType;
-  int averageRating;
+  double averageRating;
   int ratingsCount;
   String maturityRating;
   bool allowAnonLogging;

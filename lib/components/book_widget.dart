@@ -1,11 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:applivrosbloc/models/book.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
 class BookWidget extends StatelessWidget {
 
-  String imageUrl= "https://images.unsplash.com/photo-1542936221-b02434e3d36e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=653&q=80";
-  String author;
-  String title;
+  final Book book;
+  VolumeInfo get _bookInfo => book.volumeInfo;
+
+  BookWidget({Key key, @required this.book }) :
+        assert(book != null), super(key : key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +23,7 @@ class BookWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                  imageUrl,
+                  _bookInfo.imageLinks.thumbnail,
                 fit: BoxFit.fill,
               ),
             ),
@@ -46,14 +50,16 @@ class BookWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Text("Titulo",
+                  Text(_bookInfo.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
                       color: Colors.black
                     ),
                   ),
-                  Text("Autor",
+                  Text(_bookInfo.authors[0],
                     style: TextStyle(
                         color: Colors.black54
                     ),
